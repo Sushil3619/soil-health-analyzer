@@ -1,0 +1,33 @@
+{
+  "model_performance": {
+    "soil_health_classification": "70.0%",
+    "crop_recommendation": "96.3%"
+  },
+  "key_features": [
+    "pH",
+    "Fe",
+    "Mn",
+    "OC",
+    "Zn",
+    "K",
+    "N",
+    "P"
+  ],
+  "dataset_info": {
+    "total_samples": 1000,
+    "features": 17,
+    "soil_health_categories": [
+      "Excellent",
+      "Good",
+      "Fair",
+      "Poor"
+    ],
+    "crop_types": [
+      "Wheat",
+      "Corn",
+      "Rice",
+      "Cotton",
+      "Barley"
+    ]
+  }
+}

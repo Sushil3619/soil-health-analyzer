@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Health Assessment & Nutrient Prediction</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-seedling"></i>
+                <h3>Soil Health Analyzer</h3>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#input">Input</a></li>
+                <li><a href="#predictions">Predictions</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#visualizations">Visualizations</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Soil Health Assessment</h1>
+                <p class="hero-tagline">Advanced Machine Learning for Nutrient Prediction & Crop Recommendations</p>
+                <div class="hero-actions">
+                    <a href="#input" class="btn btn--primary">Start Analysis</a>
+                    <button id="loadSampleBtn" class="btn btn--secondary">Load Sample Data</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Input Section -->
+    <section id="input" class="input-section">
+        <div class="container">
+            <h2 class="section-title">Soil Parameters Input</h2>
+            <div class="input-grid">
+                <!-- Nutrients -->
+                <div class="parameter-group">
+                    <h3 class="group-title"><i class="fas fa-leaf"></i> Primary Nutrients</h3>
+                    <div class="parameter-item">
+                        <label for="N" class="form-label">Nitrogen (N) - %</label>
+                        <input type="range" id="N" min="0" max="0.5" step="0.01" value="0.15" class="range-input">
+                        <input type="number" id="N-number" min="0" max="0.5" step="0.01" value="0.15" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="P" class="form-label">Phosphorus (P) - mg/kg</label>
+                        <input type="range" id="P" min="0" max="80" step="1" value="25" class="range-input">
+                        <input type="number" id="P-number" min="0" max="80" step="1" value="25" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="K" class="form-label">Potassium (K) - mg/kg</label>
+                        <input type="range" id="K" min="0" max="300" step="1" value="150" class="range-input">
+                        <input type="number" id="K-number" min="0" max="300" step="1" value="150" class="number-input">
+                    </div>
+                </div>
+
+                <!-- Chemical Properties -->
+                <div class="parameter-group">
+                    <h3 class="group-title"><i class="fas fa-flask"></i> Chemical Properties</h3>
+                    <div class="parameter-item">
+                        <label for="pH" class="form-label">pH Level</label>
+                        <input type="range" id="pH" min="3" max="10" step="0.1" value="6.5" class="range-input">
+                        <input type="number" id="pH-number" min="3" max="10" step="0.1" value="6.5" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="EC" class="form-label">Electrical Conductivity (EC) - dS/m</label>
+                        <input type="range" id="EC" min="0" max="3" step="0.1" value="0.8" class="range-input">
+                        <input type="number" id="EC-number" min="0" max="3" step="0.1" value="0.8" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="OC" class="form-label">Organic Carbon (OC) - %</label>
+                        <input type="range" id="OC" min="0" max="4" step="0.1" value="1.2" class="range-input">
+                        <input type="number" id="OC-number" min="0" max="4" step="0.1" value="1.2" class="number-input">
+                    </div>
+                </div>
+
+                <!-- Micronutrients -->
+                <div class="parameter-group">
+                    <h3 class="group-title"><i class="fas fa-atom"></i> Micronutrients</h3>
+                    <div class="parameter-item">
+                        <label for="Zn" class="form-label">Zinc (Zn) - mg/kg</label>
+                        <input type="range" id="Zn" min="0" max="5" step="0.1" value="1.5" class="range-input">
+                        <input type="number" id="Zn-number" min="0" max="5" step="0.1" value="1.5" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="Fe" class="form-label">Iron (Fe) - mg/kg</label>
+                        <input type="range" id="Fe" min="0" max="100" step="1" value="45" class="range-input">
+                        <input type="number" id="Fe-number" min="0" max="100" step="1" value="45" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="Cu" class="form-label">Copper (Cu) - mg/kg</label>
+                        <input type="range" id="Cu" min="0" max="8" step="0.1" value="2.5" class="range-input">
+                        <input type="number" id="Cu-number" min="0" max="8" step="0.1" value="2.5" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="Mn" class="form-label">Manganese (Mn) - mg/kg</label>
+                        <input type="range" id="Mn" min="0" max="40" step="1" value="15" class="range-input">
+                        <input type="number" id="Mn-number" min="0" max="40" step="1" value="15" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="B" class="form-label">Boron (B) - mg/kg</label>
+                        <input type="range" id="B" min="0" max="3" step="0.1" value="0.8" class="range-input">
+                        <input type="number" id="B-number" min="0" max="3" step="0.1" value="0.8" class="number-input">
+                    </div>
+                </div>
+
+                <!-- Environmental -->
+                <div class="parameter-group">
+                    <h3 class="group-title"><i class="fas fa-thermometer-half"></i> Environmental</h3>
+                    <div class="parameter-item">
+                        <label for="Temperature" class="form-label">Temperature - °C</label>
+                        <input type="range" id="Temperature" min="10" max="40" step="1" value="25" class="range-input">
+                        <input type="number" id="Temperature-number" min="10" max="40" step="1" value="25" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="Moisture" class="form-label">Moisture - %</label>
+                        <input type="range" id="Moisture" min="10" max="80" step="1" value="45" class="range-input">
+                        <input type="number" id="Moisture-number" min="10" max="80" step="1" value="45" class="number-input">
+                    </div>
+                </div>
+
+                <!-- Soil Composition -->
+                <div class="parameter-group">
+                    <h3 class="group-title"><i class="fas fa-mountain"></i> Soil Composition</h3>
+                    <div class="parameter-item">
+                        <label for="Sand" class="form-label">Sand - %</label>
+                        <input type="range" id="Sand" min="10" max="80" step="1" value="40" class="range-input">
+                        <input type="number" id="Sand-number" min="10" max="80" step="1" value="40" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="Clay" class="form-label">Clay - %</label>
+                        <input type="range" id="Clay" min="5" max="60" step="1" value="30" class="range-input">
+                        <input type="number" id="Clay-number" min="5" max="60" step="1" value="30" class="number-input">
+                    </div>
+                    <div class="parameter-item">
+                        <label for="Silt" class="form-label">Silt - %</label>
+                        <input type="range" id="Silt" min="5" max="50" step="1" value="30" class="range-input">
+                        <input type="number" id="Silt-number" min="5" max="50" step="1" value="30" class="number-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sample-controls">
+                <h4>Load Sample Soil Data:</h4>
+                <div class="sample-buttons">
+                    <button class="btn btn--outline" data-sample="0">Poor Quality Soil</button>
+                    <button class="btn btn--outline" data-sample="1">Good Quality Soil</button>
+                    <button class="btn btn--outline" data-sample="2">High pH Alkaline Soil</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Predictions Section -->
+    <section id="predictions" class="predictions-section">
+        <div class="container">
+            <h2 class="section-title">Soil Health Analysis</h2>
+            <div class="predictions-grid">
+                <div class="prediction-card health-score-card">
+                    <h3><i class="fas fa-heartbeat"></i> Soil Health Score</h3>
+                    <div class="score-display">
+                        <div class="score-number" id="healthScore">75</div>
+                        <div class="score-bar">
+                            <div class="score-progress" id="healthProgress"></div>
+                        </div>
+                    </div>
+                    <div class="health-category" id="healthCategory">Good</div>
+                    <div class="health-description" id="healthDescription">Well-balanced soil</div>
+                </div>
+
+                <div class="prediction-card crop-recommendation-card">
+                    <h3><i class="fas fa-wheat-awn"></i> Recommended Crop</h3>
+                    <div class="crop-display">
+                        <div class="crop-name" id="recommendedCrop">Wheat</div>
+                        <div class="confidence-level">
+                            <span>Confidence: </span>
+                            <span id="cropConfidence">85%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prediction-card nutrient-status-card">
+                    <h3><i class="fas fa-chart-line"></i> Nutrient Status</h3>
+                    <div class="nutrient-indicators" id="nutrientIndicators">
+                        <div class="nutrient-indicator">
+                            <span class="nutrient-name">Nitrogen:</span>
+                            <span class="nutrient-status good">✅ Adequate</span>
+                        </div>
+                        <div class="nutrient-indicator">
+                            <span class="nutrient-name">Phosphorus:</span>
+                            <span class="nutrient-status good">✅ Adequate</span>
+                        </div>
+                        <div class="nutrient-indicator">
+                            <span class="nutrient-name">Potassium:</span>
+                            <span class="nutrient-status good">✅ Adequate</span>
+                        </div>
+                        <div class="nutrient-indicator">
+                            <span class="nutrient-name">pH Level:</span>
+                            <span class="nutrient-status good">✅ Optimal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="recommendations-section">
+        <div class="container">
+            <h2 class="section-title">Recommendations</h2>
+            <div class="recommendations-list" id="recommendationsList">
+                <div class="recommendation-item high-priority">
+                    <div class="recommendation-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="recommendation-content">
+                        <h4>pH Adjustment</h4>
+                        <p>Consider adding lime to increase soil pH for optimal nutrient availability.</p>
+                    </div>
+                </div>
+                <div class="recommendation-item medium-priority">
+                    <div class="recommendation-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="recommendation-content">
+                        <h4>Organic Matter</h4>
+                        <p>Add compost or organic fertilizers to improve soil structure and water retention.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="export-section">
+                <button id="exportBtn" class="btn btn--primary">
+                    <i class="fas fa-download"></i> Export Results
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizations Section -->
+    <section id="visualizations" class="visualizations-section">
+        <div class="container">
+            <h2 class="section-title">Data Visualizations</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Nutrient Levels vs Optimal Ranges</h3>
+                    <div class="chart-wrapper" style="position: relative; height: 400px;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>pH Level Indicator</h3>
+                    <div class="ph-indicator">
+                        <div class="ph-scale">
+                            <div class="ph-marker" id="phMarker"></div>
+                            <div class="ph-optimal-zone"></div>
+                        </div>
+                        <div class="ph-labels">
+                            <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                        </div>
+                        <div class="ph-value">Current pH: <span id="currentPH">6.5</span></div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Soil Composition</h3>
+                    <div class="chart-wrapper" style="position: relative; height: 400px;">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Soil Health Analyzer. Advanced ML-powered agricultural analytics.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
